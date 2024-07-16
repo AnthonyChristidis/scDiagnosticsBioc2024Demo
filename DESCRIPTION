@@ -36,7 +36,7 @@ Imports:
     scater,
     ggplot2
 Remotes:
-     scDiagnostics=gitlab::ccb-hms/scDiagnostics
+     scDiagnostics=github::ccb-hms/scDiagnostics
 Suggests: 
     AUCell,
     BiocStyle,
