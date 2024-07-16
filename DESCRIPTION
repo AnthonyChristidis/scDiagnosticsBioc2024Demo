@@ -1,28 +1,55 @@
-Package: BuildABiocWorkshop
-Title: Bioconductor or R Workshop Template and Github Actions
+Package: scDiagnosticsBioc2024Demo
+Title: Bioconductor Workshop for scDiagnostics
 Version: 2.0.1
-Authors@R: 
-    person(given = "Sean",
-           family = "Davis",
-           role = c("aut", "cre"),
-           email = "seandavi@gmail.com",
-           comment = c(ORCID = "0000-0002-8991-6458"))
-Description: This package serves as a template for using github actions to 
-    prepare a Bioconductor Workshop package for use. In particular,
-    a pkgdown website and docker image are generated based on workflow 
-    settings. 
+Authors@R: c(
+    person("Anthony", "Christidis", role = c("aut", "cre"), 
+            email = "anthony-alexander_christidis@hms.harvard.edu", 
+            comment = c(ORCID = "0000-0002-4565-6279")),
+    person("Andrew", "Ghazi", role = "aut"),
+    person("Smriti", "Chawla", role = "aut"),
+    person("Nitesh", "Turaga", role = "ctb"),
+    person("Ludwig", "Geistlinger", role = "aut"),
+    person("Robert", "Gentleman", role = "aut")
+  )
+Description: The scDiagnostics package provides diagnostic plots to
+    assess the quality of cell type assignments from single cell gene
+    expression profiles. The implemented functionality allows to
+    assess the reliability of cell type annotations, investigate gene
+    expression patterns, and explore relationships between different
+    cell types in query and reference datasets allowing users to
+    detect potential misalignments between reference and query
+    datasets. The package also provides visualization capabilities for
+    diagnositics purposes.    
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Depends: 
+    R (>= 4.4.0),
     Biobase
+Imports:
+    SingleCellExperiment,
+    SummarizedExperiment,
+    methods,
+    scran,
+    scater,
+    ggplot2
+Remotes:
+     scDiagnostics=gitlab::ccb-hms/scDiagnostics
 Suggests: 
+    AUCell,
+    BiocStyle,
+    Matrix,
+    scRNAseq,
+    SingleR,
+    celldex,
+    scuttle,
+    dplyr,
     knitr,
     rmarkdown,
     pkgdown
-URL: https://seandavi.github.io/BuildABiocWorkshop/
-BugReports: https://github.com/seandavi/BuildABiocWorkshop/issues/new/choose
+URL: https://AnthonyChristidis.github.io/scDiagnosticsBioc2024Demo/
+BugReports: https://github.com/AnthonyChristidis/scDiagnosticsBioc2024Demo/issues/new/choose
 VignetteBuilder: knitr
-DockerImage: ghcr.io/seandavi/buildabiocworkshop:latest
+DockerImage: ghcr.io/anthonychristidis/scdiagnosticsbioc2024demo:latest
