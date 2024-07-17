@@ -1,0 +1,10 @@
+pandoc: '3.2'
+pkgdown: 2.1.0
+pkgdown_sha: ~
+articles:
+  HOWTO_BUILD_WORKSHOP: HOWTO_BUILD_WORKSHOP.html
+  workshop_example: workshop_example.html
+last_built: 2024-07-17T01:50Z
+urls:
+  reference: https://AnthonyChristidis.github.io/scDiagnosticsBioc2024Demo/reference
+  article: https://AnthonyChristidis.github.io/scDiagnosticsBioc2024Demo/articles
