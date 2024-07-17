@@ -38,7 +38,7 @@ Imports:
 Remotes:
      scDiagnostics=github::ccb-hms/scDiagnostics
 Suggests: 
-    AUCell,
+    AUCell, 
     BiocStyle,
     Matrix,
     scRNAseq,
