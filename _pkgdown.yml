@@ -13,6 +13,6 @@ home:
 navbar:
   right:
    - icon: fa-github
-     href: https://github.com/seandavi/BuildABiocWorkshop
+     href: https://github.com/AnthonyChristidis/scDiagnosticsBioc2024Demo
      
 
