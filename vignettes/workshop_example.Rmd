@@ -1,107 +1,395 @@
 ---
-title: "An Example Workshop"
-author: Sean Davis^[seandavi@gmail.com]
+title: "ScDiagnostics BioC2024 Workshop"
+author: Anthony Christidis^[anthony-alexander_christidis@hms.harvard.edu]
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{An Example Workshop}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{ScDiagnostics BioC2024 Workshop}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
+```{r setup, include = FALSE}
+knitr::knit_hooks$set(pngquant = knitr::hook_pngquant)
 
-```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  dev = "ragg_png",
+  dpi = 72,
+  fig.retina = 2,
+  fig.width = 8.6667,
+  fig.height = 5.3334,
+  fig.align = "center",
+  out.width = "100%",
+  pngquant = "--speed=1 --quality=1-10"
 )
 ```
 
-# Workshop Title
+# ScDiagnostics BioC2024 Workshop
 
-Authors:
-    Author Name^[Institution],
-    Another Author^[Another Institution].
-    <br/>
-Last modified: 14 May, 2018.
+Authors: Anthony Christidis[^1], Andrew Ghazi[^2], Ludwig
+Geistlinger[^3]. <br/> Last modified: 22 July, 2024
+
+[^1]: Core for Computational Biomedicine, Harvard Medical School
+
+[^2]: Core for Computational Biomedicine, Harvard Medical School
+
+[^3]: Core for Computational Biomedicine, Harvard Medical School
 
 ## Overview
 
 ### Description
 
-Along with the topic of your workshop, include how students can expect
-to spend their time. For the description may also include information
-about what type of workshop it is (e.g. instructor-led live demo, lab,
-lecture + lab, etc.). Instructors are strongly recommended to provide
-completely worked examples for lab sessions, and a set of stand-alone
-notes that can be read and understood outside of the workshop.
+`scDiagnostics` is a comprehensive toolkit designed for the analysis and
+diagnostics of single-cell RNA sequencing (scRNA-seq) data. This package
+provides functionalities for comparing principal components, visualizing
+canonical correlation analysis (CCA) outputs, and plotting cell
+type-specific MDS and PCA projections, among other tasks.
 
 ### Pre-requisites
 
-List any workshop prerequisites, for example:
+Before attending this workshop, participants should have a basic
+understanding of single-cell RNA sequencing (scRNA-seq) data analysis
+and familiarity with Bioconductor packages. Specifically, knowledge of
+the `SingleCellExperiment` package will be useful for working with
+single-cell datasets. While familiarity with dimensionality reduction
+techniques, such as Principal Component Analysis (PCA), and statistical
+tests will enhance the learning experience, it is not required.
 
-* Basic knowledge of R syntax
-* Familiarity with the GenomicRanges class
-* Familiarity with xyz vignette (provide link)
+A solid foundation in single-cell analysis techniques and tools will
+significantly benefit those looking to fully leverage the capabilities
+of specialized packages like `scDiagnostics`." Basic proficiency in R
+and R Markdown is also recommended to follow along with the workshop
+exercises.
 
-List relevant background reading for the workshop, including any
-theoretical background you expect students to have.
+## Setup (*R* / *Bioconductor*)
 
-* List any textbooks, papers, or other reading that students should be
-  familiar with. Include direct links where possible.
+First, let's load the necessary libraries and data.
 
-### Participation
+```{r libraries, message=FALSE}
+# Load necessary libraries
+library(scDiagnostics)
+library(scran)
+library(scater)
+```
 
-Describe how students will be expected to participate in the workshop.
+We will use the following datasets available in `scDiagnostics` for the
+workshop. These datasets are processed versions of the dataset
+`HeOrganAtlasData(tissue = c("Marrow"))` in the Bioconductor package
+`scRNAseq`.
 
-### _R_ / _Bioconductor_ packages used
+```{r data, message=FALSE}
+# Load data
+data("reference_data")
+data("query_data")
+```
 
-List any _R_ / _Bioconductor_ packages that will be explicitly covered.
+We will also create a dataset where we extract only one cell type (CD4)
+from the data. We use the SingleR annotation to subset the data. THis
+will allow us to evaluate how well aligned the CD4 cells are between the
+reference and query datasets.
+
+```{r subset, message=FALSE}
+# Subset data for CD4
+reference_data_subset <- reference_data[, which(reference_data$expert_annotation == "CD4")]
+query_data_subset <- query_data[, which(query_data$SingleR_annotation == "CD4")]
+
+# Selecting highly variable genes
+ref_top_genes <- getTopHVGs(reference_data_subset, n = 500)
+query_top_genes <- getTopHVGs(query_data_subset, n = 500)
+
+# Intersect the gene symbols to obtain common genes
+common_genes <- intersect(ref_top_genes, query_top_genes)
+reference_data_subset <- reference_data_subset[common_genes,]
+query_data_subset <- query_data_subset[common_genes,]
+
+# Run PCA
+reference_data_subset <- runPCA(reference_data_subset)
+query_data_subset <- runPCA(query_data_subset)
+```
 
 ### Time outline
 
 An example for a 45-minute workshop:
 
-| Activity                     | Time |
-|------------------------------|------|
-| Packages                     | 15m  |
-| Package Development          | 15m  |
-| Contributing to Bioconductor | 5m   |
-| Best Practices               | 10m  |
-
-### Workshop goals and objectives
-
-List "big picture" student-centered workshop goals and learning
-objectives. Learning goals and objectives are related, but not the
-same thing. These goals and objectives will help some people to decide
-whether to attend the conference for training purposes, so please make
-these as precise and accurate as possible.
-
-*Learning goals* are high-level descriptions of what
-participants will learn and be able to do after the workshop is
-over. *Learning objectives*, on the other hand, describe in very
-specific and measurable terms specific skills or knowledge
-attained. The [Bloom's Taxonomy](#bloom) may be a useful framework
-for defining and describing your goals and objectives, although there
-are others.
+| Activity                               | Time |
+|----------------------------------------|------|
+| Introduction to Annotation Diagnostics | 10m  |
+| Brief Overview                         | 10m  |
+| Example Workflow                       | 15m  |
+| Questions and Answers                  | 10m  |
 
 ### Learning goals
 
-Some examples:
+The goal of this workshop is to provide participants with a thorough
+understanding of the `scDiagnostics` package, enabling them to
+effectively analyze and interpret single-cell RNA sequencing data.
+Participants will gain hands-on experience in utilizing the package's
+diverse functionalities to enhance their single-cell data analysis
+workflows.
 
-* describe how to...
-* identify methods for...
-* understand the difference between...
+By the end of this workshop, participants will understand the
+capabilities and applications of `scDiagnostics`, master visualization
+techniques for both multiple and single cell types, calculate
+correlations and distances between cell types, perform and interpret
+statistical tests, detect and visualize anomalies, evaluate data quality
+and gene overlap, and utilize additional analytical tools.
 
 ### Learning objectives
 
-* analyze xyz data to produce...
-* create xyz plots
-* evaluate xyz data for artifacts
+By the end of this workshop, participants will be able to:
 
-## Workshop
+1.  **Visualize Differences Between Datasets:**
+    -   Use various plotting functions to compare query and reference
+        datasets across multiple and single cell types.
+2.  **Evaluate Gene Overlap:**
+    -   Utilize tools for gene overlap measures.
+3.  **Calculate Correlations and Distances:**
+    -   Implement functions to calculate correlations and distances
+        between different cell types.
+4.  **Perform Statistical Tests:**
+    -   Apply statistical methods to compare groups and assess
+        significance.
+5.  **Detect Anomalies:**
+    -   Identify and visualize anomalies in single-cell data.
 
-Divide the workshop into sections (`## A Section`). Include
-fully-evaluated _R_ code chunks. Develop exercises and solutions, and
-anticipate that your audience will walk through the code with you, or
-work on the code independently -- do not be too ambitious in the
-material that you present.
+## Brief Overview of scDiagnostics
+
+### Visualize Differences Between Datasets
+
+#### `plotCellTypePCA`
+
+This function plots the principal components for different cell types in
+the query and reference datasets.
+
+```{r pca_plot, message=FALSE}
+pc_plot <- plotCellTypePCA(query_data = query_data, 
+                           reference_data = reference_data,
+                           cell_types = c("CD4", "CD8", "B_and_plasma", "Myeloid"),
+                           query_cell_type_col = "SingleR_annotation", 
+                           ref_cell_type_col = "expert_annotation", 
+                           pc_subset = 1:5)
+pc_plot
+```
+
+#### `boxplotPCA`
+
+This function generates a boxplot visualization of principal components
+(PCs) for different cell types across two datasets (query and
+reference).
+
+```{r boxplot, message=FALSE}
+pc_boxplot <- boxplotPCA(query_data = query_data, 
+                         reference_data = reference_data,
+                         query_cell_type_col = "SingleR_annotation", 
+                         ref_cell_type_col = "expert_annotation", 
+                         cell_types = c("CD4", "CD8", "B_and_plasma", "Myeloid"),
+                         pc_subset = 1:5)
+pc_boxplot
+```
+
+#### `plotCellTypeMDS`
+
+This function facilitates the assessment of similarity between reference
+and query datasets through Multidimensional Scaling (MDS) scatter plots.
+It allows the visualization of cell types based on a dissimilarity
+matrix computed from a user-selected gene set.
+
+```{r mds, message=FALSE}
+mds_plot <- plotCellTypeMDS(query_data = query_data, 
+                            reference_data = reference_data, 
+                            cell_types = c("CD4", "CD8", "B_and_plasma"),
+                            query_cell_type_col = "SingleR_annotation", 
+                            ref_cell_type_col = "expert_annotation")
+mds_plot
+```
+
+#### `comparePCA`
+
+This function compares the principal components (PCs) obtained from
+separate PCA on reference and query datasets for a single cell type
+using either cosine similarity or correlation.
+
+The S3 plot method generates a heatmap to visualize the cosine
+similarities between principal components from the output of the
+comparePCA function.
+
+```{r pca_comparison, message=FALSE}
+similarity_mat <- comparePCA(query_data = query_data_subset, 
+                             reference_data = reference_data_subset, 
+                             query_cell_type_col = "SingleR_annotation", 
+                             ref_cell_type_col = "expert_annotation",
+                             pc_subset = 1:5)
+plot(similarity_mat)
+```
+
+### Evaluate Gene Overlap
+
+#### `calculateVarImpOverlap`
+
+This function uses the Random Forest algorithm to calculate the
+importance of genes in differentiating between cell types within both a
+reference dataset and a query dataset. The function then compares the
+top genes identified in both datasets to determine the overlap in their
+importance scores.
+
+```{r var_imp_overlap, message=FALSE}
+var_imp <- calculateVarImpOverlap(reference_data = reference_data, 
+                                    query_data = query_data, 
+                                    ref_cell_type_col = "expert_annotation", 
+                                    query_cell_type_col = "SingleR_annotation")
+var_imp[["var_imp_comparison"]]
+```
+
+### Calculate Correlations and Distances
+
+#### `calculateAveragePairwiseCorrelation`
+
+Computes the average pairwise correlations between specified cell types
+in single-cell gene expression data.
+
+The S3 plot method takes the output of the
+`calculateAveragePairwiseCorrelation` function, which should be a matrix
+of pairwise correlations, and plots it as a heatmap.
+
+```{r pairwise_correlations, message=FALSE}
+cor_matrix_avg <- calculateAveragePairwiseCorrelation(query_data = query_data, 
+                                                      reference_data = reference_data, 
+                                                      query_cell_type_col = "SingleR_annotation", 
+                                                      ref_cell_type_col = "expert_annotation", 
+                                                      cell_types = c("CD4", "CD8", "B_and_plasma"), 
+                                                      pc_subset = 1:5,
+                                                      correlation_method = "spearman")
+plot(cor_matrix_avg)
+```
+
+### Perform Statistical Tests
+
+#### `calculateNearestNeighborProbabilities`
+
+This function computes the probabilities for each query cell of
+belonging to either the reference or query dataset for each cell type
+using nearest neighbor analysis.
+
+The S3 plot method generates a density plot showing the distribution of
+probabilities for each cell of belonging to either the reference or
+query dataset for each cell type.
+
+```{r probabilities, message=FALSE}
+nn_output <- calculateNearestNeighborProbabilities(query_data = query_data, 
+                                                   reference_data = reference_data,
+                                                   query_cell_type_col = "SingleR_annotation", 
+                                                   ref_cell_type_col = "expert_annotation",
+                                                   pc_subset = 1:5)
+plot(nn_output)
+```
+
+#### `calculateHotellingPValue`
+
+This function calculates Hotelling's T-squared statistic for comparing
+multivariate means between reference and query datasets, projected onto
+a subset of principal components (PCs). It performs a permutation test
+to obtain p-values for each cell type specified.
+
+```{r hotelling, message=FALSE}
+p_values <- calculateHotellingPValue(query_data = query_data, 
+                                     reference_data = reference_data, 
+                                     query_cell_type_col = "SingleR_annotation", 
+                                     ref_cell_type_col = "expert_annotation",
+                                     pc_subset = 1:5) 
+round(p_values, 5)
+```
+
+### Detect Anomalies
+
+#### `detectAnomaly`
+
+This function projects the query data onto the PCA space of the
+reference data. An isolation forest is then built on the reference data
+to identify anomalies in the query data based on their PCA projections.
+If no query dataset is provided by the user, the anomaly scores are
+computed on the reference data itself. Anomaly scores for the data with
+all combined cell types are also provided as part of the output.
+
+The S3 plot method extracts the specified PCs from the given anomaly
+detection object and generates scatter plots for each pair of PCs. It
+uses ggplot2 to create a faceted plot where each facet represents a pair
+of PCs. Anomalies are highlighted in red, while normal points are shown
+in black.
+
+```{r anomaly, message=FALSE}
+anomaly_output <- detectAnomaly(reference_data = reference_data, 
+                                query_data = query_data, 
+                                ref_cell_type_col = "expert_annotation", 
+                                query_cell_type_col = "SingleR_annotation",
+                                pc_subset = 1:5,
+                                n_tree = 500,
+                                anomaly_treshold = 0.6) 
+plot(anomaly_output, 
+     cell_type = "CD4", 
+     pc_subset = 1:5, 
+     data_type = c("query", "reference"))
+```
+
+## Example Workflow
+
+First let us see how well the `SingleR` annotation performed
+
+```{r expert_comparison, message=FALSE}
+table(Expert_Annotation = query_data$expert_annotation, 
+      SingleR = query_data$SingleR_annotation)
+
+```
+
+We can see that according to expert annotation, a lot of CD8 cells were
+incorrectly labeled as CD4 cells by `SingleR`. Let's identify some of
+these cells (the top 5 deviating cells for CD4).
+
+First, we compute the distances from each query cell to each reference
+cell.
+
+```{r distances, message=FALSE}
+distance_data <- calculateCellDistances(query_data = query_data, 
+                                        reference_data = reference_data, 
+                                        query_cell_type_col = "SingleR_annotation", 
+                                        ref_cell_type_col = "expert_annotation",
+                                        pc_subset = 1:10) 
+```
+
+Now, let's compute the top six anomalies for CD4 using the anomaly
+detection function.
+
+```{r anomaly_cd4, message=FALSE}
+cd4_anomalies <- detectAnomaly(reference_data = reference_data, 
+                               query_data = query_data, 
+                               query_cell_type_col = "SingleR_annotation", 
+                               ref_cell_type_col = "expert_annotation",
+                               pc_subset = 1:10,
+                               n_tree = 500,
+                               anomaly_treshold = 0.5)$CD4
+cd4_top6_anomalies <- names(sort(cd4_anomalies$query_anomaly_scores, decreasing = TRUE)[1:6])
+```
+
+Next, we plot the densities of the distances for each of these anomalous
+cells for CD4 and CD8.
+
+```{r plot_anomaly_cd4, message=FALSE}
+plot(distance_data, ref_cell_type = "CD4", cell_names = cd4_top6_anomalies)
+plot(distance_data, ref_cell_type = "CD8", cell_names = cd4_top6_anomalies)
+```
+
+We can also compute some measures of similarity between these cells and
+all cell types.
+
+```{r anomaly_overlap, message=FALSE}
+overlap_measures <- calculateCellDistancesSimilarity(query_data = query_data, 
+                                                     reference_data = reference_data, 
+                                                     cell_names = cd4_top6_anomalies,
+                                                     query_cell_type_col = "SingleR_annotation", 
+                                                     ref_cell_type_col = "expert_annotation",
+                                                     pc_subset = 1:10) 
+overlap_measures
+```
