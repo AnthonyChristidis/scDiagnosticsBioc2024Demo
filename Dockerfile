@@ -2,7 +2,7 @@ FROM bioconductor/bioconductor_docker:devel
 
 WORKDIR /home/rstudio
 
-COPY --chown=rstudio:rstudio . /home/rstudio/
+RUN chown -R rstudio:rstudio /home/rstudio/R/library
 
 RUN Rscript -e "options(repos = c(CRAN = 'https://cran.r-project.org')); install.packages('remotes', repos = 'https://cran.r-project.org')"
 
