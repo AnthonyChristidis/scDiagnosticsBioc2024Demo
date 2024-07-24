@@ -34,6 +34,7 @@ Imports:
     methods,
     scran,
     scater,
+    scDiagnostics,
     ggplot2
 Remotes:
      ccb-hms/scDiagnostics
