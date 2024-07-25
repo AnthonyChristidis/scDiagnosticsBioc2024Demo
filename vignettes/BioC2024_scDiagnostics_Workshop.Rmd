@@ -1,7 +1,16 @@
 ---
 title: "ScDiagnostics BioC2024 Workshop"
-author: Anthony Christidis^[anthony-alexander_christidis@hms.harvard.edu]
-output: rmarkdown::html_vignette
+author:
+    - name: "Anthony Christidis"
+      email: "anthony-alexander_christidis@hms.harvard.edu"
+date: "`r Sys.Date()`"
+output: 
+    BiocStyle::html_document:
+        toc: true
+        number_sections: true
+        toc_depth: 3
+        toc_float:
+            collapsed: true
 vignette: >
   %\VignetteIndexEntry{ScDiagnostics BioC2024 Workshop}
   %\VignetteEncoding{UTF-8}
@@ -28,27 +37,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ScDiagnostics BioC2024 Workshop
 
-Authors: Anthony Christidis[^1], Andrew Ghazi[^2], Smriti Chawla[^3],
-Nitesh Turaga[^4], Ludwig Geistlinger[^5], Robert Gentleman[^6]. <br/>
-Last modified: 25 July, 2024
+# Overview
 
-[^1]: Center for Computational Biomedicine, Harvard Medical School
-
-[^2]: Center for Computational Biomedicine, Harvard Medical School
-
-[^3]: Center for Computational Biomedicine, Harvard Medical School
-
-[^4]: Center for Computational Biomedicine, Harvard Medical School
-
-[^5]: Center for Computational Biomedicine, Harvard Medical School
-
-[^6]: Center for Computational Biomedicine, Harvard Medical School
-
-## Overview
-
-### Description
+## Description
 
 `scDiagnostics` is a comprehensive toolkit designed for the analysis and
 diagnostics of single-cell RNA sequencing (scRNA-seq) data. This package
@@ -56,7 +48,7 @@ provides functionalities for comparing principal components, visualizing
 canonical correlation analysis (CCA) outputs, and plotting cell
 type-specific MDS and PCA projections, among other tasks.
 
-### Pre-requisites
+## Pre-requisites
 
 Before attending this workshop, participants should have a basic
 understanding of single-cell RNA sequencing (scRNA-seq) data analysis
@@ -72,7 +64,7 @@ of specialized packages like `scDiagnostics`." Basic proficiency in R
 and R Markdown is also recommended to follow along with the workshop
 exercises.
 
-## Setup (*R* / *Bioconductor*)
+# Setup (*R* / *Bioconductor*)
 
 First, let's load the necessary libraries and data.
 
@@ -118,7 +110,7 @@ reference_data_subset <- runPCA(reference_data_subset)
 query_data_subset <- runPCA(query_data_subset)
 ```
 
-### Time outline
+## Time outline
 
 An example for a 45-minute workshop:
 
@@ -128,7 +120,7 @@ An example for a 45-minute workshop:
 | Overview of Package Functions | 25m  |
 | Example Workflow              | 10m  |
 
-### Learning goals
+## Learning goals
 
 The goal of this workshop is to provide participants with a thorough
 understanding of the `scDiagnostics` package, enabling them to
@@ -144,7 +136,7 @@ correlations and distances between cell types, perform and interpret
 statistical tests, detect and visualize anomalies, evaluate data quality
 and gene overlap, and utilize additional analytical tools.
 
-### Learning objectives
+## Learning objectives
 
 By the end of this workshop, participants will be able to:
 
@@ -162,11 +154,11 @@ By the end of this workshop, participants will be able to:
 5.  **Detect Anomalies:**
     -   Identify and visualize anomalies in single-cell data.
 
-## Brief Overview of scDiagnostics
+# Brief Overview of scDiagnostics
 
-### Visualize Differences Between Datasets
+## Visualize Differences Between Datasets
 
-#### `calculateDiscriminantSpace`
+## `calculateDiscriminantSpace`
 
 This function projects query single-cell RNA-seq data onto the discriminant space defined by reference data. The reference data is used to identify important variables and compute discriminant vectors, which are then used to project both reference and query data. Similarity between the query and reference projections is assessed using cosine similarity and Mahalanobis distance.
 
@@ -186,7 +178,7 @@ head(disc_output$`CD8-CD4`$query_mahalanobis_dist)
 disc_output$`CD8-CD4`$mahalanobis_crit
 ```
 
-#### `plotCellTypePCA`
+## `plotCellTypePCA`
 
 This function projects the query dataset onto the principal component space of the reference dataset and then plots the specified principal components for the specified cell types. It uses the 'projectPCA' function to perform the projection and `ggplot2` to create the plots.
 
@@ -201,7 +193,7 @@ pc_plot <- plotCellTypePCA(query_data = query_data,
 pc_plot
 ```
 
-#### `boxplotPCA`
+## `boxplotPCA`
 
 This function generates a boxplot visualization of principal components
 (PCs) for different cell types across two datasets (query and
@@ -217,7 +209,7 @@ pc_boxplot <- boxplotPCA(query_data = query_data,
 pc_boxplot
 ```
 
-#### `plotCellTypeMDS`
+## `plotCellTypeMDS`
 
 This function facilitates the assessment of similarity between reference
 and query datasets through Multidimensional Scaling (MDS) scatter plots.
@@ -233,7 +225,7 @@ mds_plot <- plotCellTypeMDS(query_data = query_data,
 mds_plot
 ```
 
-#### `comparePCA`
+## `comparePCA`
 
 This function compares the principal components (PCs) obtained from
 separate PCA on reference and query datasets for a single cell type
@@ -252,7 +244,7 @@ similarity_mat <- comparePCA(query_data = query_data_subset,
 plot(similarity_mat)
 ```
 
-#### `compareCCA`
+## `compareCCA`
 
 This function compares the subspaces spanned by the top principal components (PCs) of the reference and query datasets using canonical correlation analysis (CCA). It calculates the canonical variables, correlations, and a similarity measure for the subspaces.
 
@@ -267,7 +259,7 @@ similarity_mat <- compareCCA(query_data = query_data_subset,
                              pc_subset = 1:5)
 plot(similarity_mat)
 ```
-#### `plotWassersteinDistance`
+## `plotWassersteinDistance`
 
 This function generates a density plot of Wasserstein distances under the null hypothesis that the two datasets come from the same distribution. It computes the null distribution of Wasserstein distances and compares it to the distances between reference and query data.
 
@@ -283,9 +275,9 @@ wasserstein_plot
 
 
 
-### Evaluate Gene Overlap
+## Evaluate Gene Overlap
 
-#### `calculateVarImpOverlap`
+## `calculateVarImpOverlap`
 
 This function uses the Random Forest algorithm to calculate the
 importance of genes in differentiating between cell types within both a
@@ -301,9 +293,9 @@ var_imp <- calculateVarImpOverlap(reference_data = reference_data,
 var_imp[["var_imp_comparison"]]
 ```
 
-### Calculate Correlations and Distances
+## Calculate Correlations and Distances
 
-#### `calculateAveragePairwiseCorrelation`
+## `calculateAveragePairwiseCorrelation`
 
 Computes the average pairwise correlations between specified cell types
 in single-cell gene expression data.
@@ -323,9 +315,9 @@ cor_matrix_avg <- calculateAveragePairwiseCorrelation(query_data = query_data,
 plot(cor_matrix_avg)
 ```
 
-### Perform Statistical Tests
+## Perform Statistical Tests
 
-#### `calculateNearestNeighborProbabilities`
+## `calculateNearestNeighborProbabilities`
 
 This function computes the probabilities for each query cell of
 belonging to either the reference or query dataset for each cell type
@@ -344,7 +336,7 @@ nn_output <- calculateNearestNeighborProbabilities(query_data = query_data,
 plot(nn_output)
 ```
 
-#### `calculateHotellingPValue`
+## `calculateHotellingPValue`
 
 This function calculates Hotelling's T-squared statistic for comparing
 multivariate means between reference and query datasets, projected onto
@@ -360,7 +352,7 @@ p_values <- calculateHotellingPValue(query_data = query_data,
 round(p_values, 5)
 ```
 
-#### `regressPC`
+## `regressPC`
 
 This function performs linear regression of a covariate of interest onto one or more principal components, based on the data in a `SingleCellExperiment` object.
 
@@ -375,9 +367,9 @@ plot(regress_res, plot_type = "r_squared")
 plot(regress_res, plot_type = "p-value", alpha = 0.05)
 ```
 
-### Detect Anomalies
+## Detect Anomalies
 
-#### `detectAnomaly`
+## `detectAnomaly`
 
 This function projects the query data onto the PCA space of the
 reference data. An isolation forest is then built on the reference data
@@ -403,10 +395,10 @@ anomaly_output <- detectAnomaly(reference_data = reference_data,
 plot(anomaly_output, 
      cell_type = "CD4", 
      pc_subset = 1:5, 
-     data_type = c("query", "reference"))
+     data_type = c("query", "reference")[1])
 ```
 
-#### `calculateCellSimilarityPCA`
+## `calculateCellSimilarityPCA`
 
 This function calculates the cosine similarity between cells based on the principal components (PCs) obtained from PCA (Principal Component Analysis) loadings.
 
@@ -422,7 +414,7 @@ cosine_similarities <- calculateCellSimilarityPCA(se_object = reference_data,
 plot(cosine_similarities, pc_subset = 15:25)
 ```
 
-## Example Workflow
+# Example Workflow
 
 First let us see how well the `SingleR` annotation performed
 
