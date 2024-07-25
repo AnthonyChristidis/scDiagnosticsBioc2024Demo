@@ -3,7 +3,7 @@ pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   BioC2024_scDiagnostics_Workshop: BioC2024_scDiagnostics_Workshop.html
-last_built: 2024-07-25T07:06Z
+last_built: 2024-07-25T14:00Z
 urls:
   reference: https://AnthonyChristidis.github.io/scDiagnosticsBioc2024Demo/reference
   article: https://AnthonyChristidis.github.io/scDiagnosticsBioc2024Demo/articles
