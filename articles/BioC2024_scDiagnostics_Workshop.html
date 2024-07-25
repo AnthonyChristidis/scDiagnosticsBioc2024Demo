@@ -64,9 +64,11 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ScDiagnostics BioC2024 Workshop</h1>
                         <h4 data-toc-skip class="author">Anthony
-Christidis<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
-</h4>
-            
+Christidis</h4>
+                  <a class="author_email" href="mailto:#"></a><a href="mailto:anthony-alexander_christidis@hms.harvard.edu" class="email">anthony-alexander_christidis@hms.harvard.edu</a>
+      
+                  
+            <h4 data-toc-skip class="date">2024-07-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/AnthonyChristidis/scDiagnosticsBioc2024Demo/blob/devel/vignettes/BioC2024_scDiagnostics_Workshop.Rmd" class="external-link"><code>vignettes/BioC2024_scDiagnostics_Workshop.Rmd</code></a></small>
       <div class="hidden name"><code>BioC2024_scDiagnostics_Workshop.Rmd</code></div>
@@ -76,18 +78,11 @@ Christidis<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
     
     
 <div class="section level2">
-<h2 id="scdiagnostics-bioc2024-workshop">ScDiagnostics BioC2024 Workshop<a class="anchor" aria-label="anchor" href="#scdiagnostics-bioc2024-workshop"></a>
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>Authors: Anthony Christidis<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, Andrew Ghazi<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, Smriti Chawla<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, Nitesh
-Turaga<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>,
-Ludwig Geistlinger<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>, Robert Gentleman<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>. <br> Last modified:
-25 July, 2024</p>
 <div class="section level3">
-<h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+<h3 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
 </h3>
-<div class="section level4">
-<h4 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
-</h4>
 <p><code>scDiagnostics</code> is a comprehensive toolkit designed for
 the analysis and diagnostics of single-cell RNA sequencing (scRNA-seq)
 data. This package provides functionalities for comparing principal
@@ -95,9 +90,9 @@ components, visualizing canonical correlation analysis (CCA) outputs,
 and plotting cell type-specific MDS and PCA projections, among other
 tasks.</p>
 </div>
-<div class="section level4">
-<h4 id="pre-requisites">Pre-requisites<a class="anchor" aria-label="anchor" href="#pre-requisites"></a>
-</h4>
+<div class="section level3">
+<h3 id="pre-requisites">Pre-requisites<a class="anchor" aria-label="anchor" href="#pre-requisites"></a>
+</h3>
 <p>Before attending this workshop, participants should have a basic
 understanding of single-cell RNA sequencing (scRNA-seq) data analysis
 and familiarity with Bioconductor packages. Specifically, knowledge of
@@ -113,9 +108,9 @@ proficiency in R and R Markdown is also recommended to follow along with
 the workshop exercises.</p>
 </div>
 </div>
-<div class="section level3">
-<h3 id="setup-r-bioconductor">Setup (<em>R</em> / <em>Bioconductor</em>)<a class="anchor" aria-label="anchor" href="#setup-r-bioconductor"></a>
-</h3>
+<div class="section level2">
+<h2 id="setup-r-bioconductor">Setup (<em>R</em> / <em>Bioconductor</em>)<a class="anchor" aria-label="anchor" href="#setup-r-bioconductor"></a>
+</h2>
 <p>First, let’s load the necessary libraries and data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load necessary libraries</span></span>
@@ -152,9 +147,9 @@ between the reference and query datasets.</p>
 <span><span class="co"># Run PCA</span></span>
 <span><span class="va">reference_data_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocSingular/man/runPCA.html" class="external-link">runPCA</a></span><span class="op">(</span><span class="va">reference_data_subset</span><span class="op">)</span></span>
 <span><span class="va">query_data_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocSingular/man/runPCA.html" class="external-link">runPCA</a></span><span class="op">(</span><span class="va">query_data_subset</span><span class="op">)</span></span></code></pre></div>
-<div class="section level4">
-<h4 id="time-outline">Time outline<a class="anchor" aria-label="anchor" href="#time-outline"></a>
-</h4>
+<div class="section level3">
+<h3 id="time-outline">Time outline<a class="anchor" aria-label="anchor" href="#time-outline"></a>
+</h3>
 <p>An example for a 45-minute workshop:</p>
 <table class="table">
 <thead><tr class="header">
@@ -177,9 +172,9 @@ between the reference and query datasets.</p>
 </tbody>
 </table>
 </div>
-<div class="section level4">
-<h4 id="learning-goals">Learning goals<a class="anchor" aria-label="anchor" href="#learning-goals"></a>
-</h4>
+<div class="section level3">
+<h3 id="learning-goals">Learning goals<a class="anchor" aria-label="anchor" href="#learning-goals"></a>
+</h3>
 <p>The goal of this workshop is to provide participants with a thorough
 understanding of the <code>scDiagnostics</code> package, enabling them
 to effectively analyze and interpret single-cell RNA sequencing data.
@@ -194,9 +189,9 @@ interpret statistical tests, detect and visualize anomalies, evaluate
 data quality and gene overlap, and utilize additional analytical
 tools.</p>
 </div>
-<div class="section level4">
-<h4 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
-</h4>
+<div class="section level3">
+<h3 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
+</h3>
 <p>By the end of this workshop, participants will be able to:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -235,16 +230,17 @@ significance.</li>
 </ol>
 </div>
 </div>
+<div class="section level2">
+<h2 id="brief-overview-of-scdiagnostics">Brief Overview of scDiagnostics<a class="anchor" aria-label="anchor" href="#brief-overview-of-scdiagnostics"></a>
+</h2>
 <div class="section level3">
-<h3 id="brief-overview-of-scdiagnostics">Brief Overview of scDiagnostics<a class="anchor" aria-label="anchor" href="#brief-overview-of-scdiagnostics"></a>
+<h3 id="visualize-differences-between-datasets">Visualize Differences Between Datasets<a class="anchor" aria-label="anchor" href="#visualize-differences-between-datasets"></a>
 </h3>
-<div class="section level4">
-<h4 id="visualize-differences-between-datasets">Visualize Differences Between Datasets<a class="anchor" aria-label="anchor" href="#visualize-differences-between-datasets"></a>
-</h4>
-<div class="section level5">
-<h5 id="calculatediscriminantspace">
+</div>
+<div class="section level3">
+<h3 id="calculatediscriminantspace">
 <code>calculateDiscriminantSpace</code><a class="anchor" aria-label="anchor" href="#calculatediscriminantspace"></a>
-</h5>
+</h3>
 <p>This function projects query single-cell RNA-seq data onto the
 discriminant space defined by reference data. The reference data is used
 to identify important variables and compute discriminant vectors, which
@@ -270,10 +266,10 @@ similarity and Mahalanobis distance.</p>
 <span><span class="va">disc_output</span><span class="op">$</span><span class="va">`CD8-CD4`</span><span class="op">$</span><span class="va">mahalanobis_crit</span></span>
 <span><span class="co">#&gt; [1] 9.21034</span></span></code></pre></div>
 </div>
-<div class="section level5">
-<h5 id="plotcelltypepca">
+<div class="section level3">
+<h3 id="plotcelltypepca">
 <code>plotCellTypePCA</code><a class="anchor" aria-label="anchor" href="#plotcelltypepca"></a>
-</h5>
+</h3>
 <p>This function projects the query dataset onto the principal component
 space of the reference dataset and then plots the specified principal
 components for the specified cell types. It uses the ‘projectPCA’
@@ -289,10 +285,10 @@ the plots.</p>
 <span><span class="va">pc_plot</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/pca_plot-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level5">
-<h5 id="boxplotpca">
+<div class="section level3">
+<h3 id="boxplotpca">
 <code>boxplotPCA</code><a class="anchor" aria-label="anchor" href="#boxplotpca"></a>
-</h5>
+</h3>
 <p>This function generates a boxplot visualization of principal
 components (PCs) for different cell types across two datasets (query and
 reference).</p>
@@ -306,10 +302,10 @@ reference).</p>
 <span><span class="va">pc_boxplot</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/boxplot-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level5">
-<h5 id="plotcelltypemds">
+<div class="section level3">
+<h3 id="plotcelltypemds">
 <code>plotCellTypeMDS</code><a class="anchor" aria-label="anchor" href="#plotcelltypemds"></a>
-</h5>
+</h3>
 <p>This function facilitates the assessment of similarity between
 reference and query datasets through Multidimensional Scaling (MDS)
 scatter plots. It allows the visualization of cell types based on a
@@ -323,10 +319,10 @@ dissimilarity matrix computed from a user-selected gene set.</p>
 <span><span class="va">mds_plot</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/mds-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level5">
-<h5 id="comparepca">
+<div class="section level3">
+<h3 id="comparepca">
 <code>comparePCA</code><a class="anchor" aria-label="anchor" href="#comparepca"></a>
-</h5>
+</h3>
 <p>This function compares the principal components (PCs) obtained from
 separate PCA on reference and query datasets for a single cell type
 using either cosine similarity or correlation.</p>
@@ -342,10 +338,10 @@ comparePCA function.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">similarity_mat</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/pca_comparison-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level5">
-<h5 id="comparecca">
+<div class="section level3">
+<h3 id="comparecca">
 <code>compareCCA</code><a class="anchor" aria-label="anchor" href="#comparecca"></a>
-</h5>
+</h3>
 <p>This function compares the subspaces spanned by the top principal
 components (PCs) of the reference and query datasets using canonical
 correlation analysis (CCA). It calculates the canonical variables,
@@ -362,7 +358,7 @@ representing the correlations.</p>
 <span>                             pc_subset <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">similarity_mat</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/cca_comparison-1.png" width="100%" style="display: block; margin: auto;">
-#### <code>plotWassersteinDistance</code></p>
+## <code>plotWassersteinDistance</code></p>
 <p>This function generates a density plot of Wasserstein distances under
 the null hypothesis that the two datasets come from the same
 distribution. It computes the null distribution of Wasserstein distances
@@ -377,14 +373,14 @@ and compares it to the distances between reference and query data.</p>
 <span><span class="va">wasserstein_plot</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/wasserstein-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
+<div class="section level3">
+<h3 id="evaluate-gene-overlap">Evaluate Gene Overlap<a class="anchor" aria-label="anchor" href="#evaluate-gene-overlap"></a>
+</h3>
 </div>
-<div class="section level4">
-<h4 id="evaluate-gene-overlap">Evaluate Gene Overlap<a class="anchor" aria-label="anchor" href="#evaluate-gene-overlap"></a>
-</h4>
-<div class="section level5">
-<h5 id="calculatevarimpoverlap">
+<div class="section level3">
+<h3 id="calculatevarimpoverlap">
 <code>calculateVarImpOverlap</code><a class="anchor" aria-label="anchor" href="#calculatevarimpoverlap"></a>
-</h5>
+</h3>
 <p>This function uses the Random Forest algorithm to calculate the
 importance of genes in differentiating between cell types within both a
 reference dataset and a query dataset. The function then compares the
@@ -401,14 +397,14 @@ importance scores.</p>
 <span><span class="co">#&gt;              CD8-CD4          CD8-Myeloid          CD4-Myeloid </span></span>
 <span><span class="co">#&gt;                 0.74                 0.30                 0.36</span></span></code></pre></div>
 </div>
+<div class="section level3">
+<h3 id="calculate-correlations-and-distances">Calculate Correlations and Distances<a class="anchor" aria-label="anchor" href="#calculate-correlations-and-distances"></a>
+</h3>
 </div>
-<div class="section level4">
-<h4 id="calculate-correlations-and-distances">Calculate Correlations and Distances<a class="anchor" aria-label="anchor" href="#calculate-correlations-and-distances"></a>
-</h4>
-<div class="section level5">
-<h5 id="calculateaveragepairwisecorrelation">
+<div class="section level3">
+<h3 id="calculateaveragepairwisecorrelation">
 <code>calculateAveragePairwiseCorrelation</code><a class="anchor" aria-label="anchor" href="#calculateaveragepairwisecorrelation"></a>
-</h5>
+</h3>
 <p>Computes the average pairwise correlations between specified cell
 types in single-cell gene expression data.</p>
 <p>The S3 plot method takes the output of the
@@ -425,14 +421,14 @@ be a matrix of pairwise correlations, and plots it as a heatmap.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cor_matrix_avg</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/pairwise_correlations-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
+<div class="section level3">
+<h3 id="perform-statistical-tests">Perform Statistical Tests<a class="anchor" aria-label="anchor" href="#perform-statistical-tests"></a>
+</h3>
 </div>
-<div class="section level4">
-<h4 id="perform-statistical-tests">Perform Statistical Tests<a class="anchor" aria-label="anchor" href="#perform-statistical-tests"></a>
-</h4>
-<div class="section level5">
-<h5 id="calculatenearestneighborprobabilities">
+<div class="section level3">
+<h3 id="calculatenearestneighborprobabilities">
 <code>calculateNearestNeighborProbabilities</code><a class="anchor" aria-label="anchor" href="#calculatenearestneighborprobabilities"></a>
-</h5>
+</h3>
 <p>This function computes the probabilities for each query cell of
 belonging to either the reference or query dataset for each cell type
 using nearest neighbor analysis.</p>
@@ -448,10 +444,10 @@ query dataset for each cell type.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">nn_output</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/probabilities-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level5">
-<h5 id="calculatehotellingpvalue">
+<div class="section level3">
+<h3 id="calculatehotellingpvalue">
 <code>calculateHotellingPValue</code><a class="anchor" aria-label="anchor" href="#calculatehotellingpvalue"></a>
-</h5>
+</h3>
 <p>This function calculates Hotelling’s T-squared statistic for
 comparing multivariate means between reference and query datasets,
 projected onto a subset of principal components (PCs). It performs a
@@ -466,10 +462,10 @@ permutation test to obtain p-values for each cell type specified.</p>
 <span><span class="co">#&gt; B_and_plasma          CD8          CD4      Myeloid </span></span>
 <span><span class="co">#&gt;        0.006        0.000        0.000        0.000</span></span></code></pre></div>
 </div>
-<div class="section level5">
-<h5 id="regresspc">
+<div class="section level3">
+<h3 id="regresspc">
 <code>regressPC</code><a class="anchor" aria-label="anchor" href="#regresspc"></a>
-</h5>
+</h3>
 <p>This function performs linear regression of a covariate of interest
 onto one or more principal components, based on the data in a
 <code>SingleCellExperiment</code> object.</p>
@@ -487,14 +483,14 @@ types.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">regress_res</span>, plot_type <span class="op">=</span> <span class="st">"p-value"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/regress-2.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
+<div class="section level3">
+<h3 id="detect-anomalies">Detect Anomalies<a class="anchor" aria-label="anchor" href="#detect-anomalies"></a>
+</h3>
 </div>
-<div class="section level4">
-<h4 id="detect-anomalies">Detect Anomalies<a class="anchor" aria-label="anchor" href="#detect-anomalies"></a>
-</h4>
-<div class="section level5">
-<h5 id="detectanomaly">
+<div class="section level3">
+<h3 id="detectanomaly">
 <code>detectAnomaly</code><a class="anchor" aria-label="anchor" href="#detectanomaly"></a>
-</h5>
+</h3>
 <p>This function projects the query data onto the PCA space of the
 reference data. An isolation forest is then built on the reference data
 to identify anomalies in the query data based on their PCA projections.
@@ -517,13 +513,13 @@ in black.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">anomaly_output</span>, </span>
 <span>     cell_type <span class="op">=</span> <span class="st">"CD4"</span>, </span>
 <span>     pc_subset <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
-<span>     data_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"query"</span>, <span class="st">"reference"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>     data_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"query"</span>, <span class="st">"reference"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/anomaly-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level5">
-<h5 id="calculatecellsimilaritypca">
+<div class="section level3">
+<h3 id="calculatecellsimilaritypca">
 <code>calculateCellSimilarityPCA</code><a class="anchor" aria-label="anchor" href="#calculatecellsimilaritypca"></a>
-</h5>
+</h3>
 <p>This function calculates the cosine similarity between cells based on
 the principal components (PCs) obtained from PCA (Principal Component
 Analysis) loadings.</p>
@@ -539,10 +535,9 @@ similarities between cells and principal components (PCs).</p>
 <p><img src="BioC2024_scDiagnostics_Workshop_files/figure-html/similarityPCA-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 </div>
-</div>
-<div class="section level3">
-<h3 id="example-workflow">Example Workflow<a class="anchor" aria-label="anchor" href="#example-workflow"></a>
-</h3>
+<div class="section level2">
+<h2 id="example-workflow">Example Workflow<a class="anchor" aria-label="anchor" href="#example-workflow"></a>
+</h2>
 <p>First let us see how well the <code>SingleR</code> annotation
 performed</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
@@ -611,25 +606,6 @@ and all cell types.</p>
 <span><span class="co">#&gt; 4 CATTCGCTCGTCACGG-1    0.9293467 0.5471585 0.8689903 0.9706775</span></span>
 <span><span class="co">#&gt; 5 CACCTTGGTTATGTGC-1    0.8687570 0.1068190 0.7406254 0.9790436</span></span>
 <span><span class="co">#&gt; 6 TTGCGTCTCCACTCCA-1    0.8519799 0.2328977 0.6573459 0.9349809</span></span></code></pre></div>
-</div>
-</div>
-<div class="footnotes footnotes-end-of-document">
-<hr>
-<ol>
-<li id="fn1"><p><a href="mailto:anthony-alexander_christidis@hms.harvard.edu" class="email">anthony-alexander_christidis@hms.harvard.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Center for Computational Biomedicine, Harvard Medical
-School<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Center for Computational Biomedicine, Harvard Medical
-School<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>Center for Computational Biomedicine, Harvard Medical
-School<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Center for Computational Biomedicine, Harvard Medical
-School<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>Center for Computational Biomedicine, Harvard Medical
-School<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>Center for Computational Biomedicine, Harvard Medical
-School<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
   </div>
 
