@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 
 # ScDiagnostics BioC2024 Workshop
 
-Authors: Anthony Christidis[^1], Andrew Ghazi[^1], Ludwig
+Authors: Anthony Christidis[^1], Andrew Ghazi, Ludwig
 Geistlinger[^1]. <br/> Last modified: 22 July, 2024
 
 [^1]: Center for Computational Biomedicine, Harvard Medical School
