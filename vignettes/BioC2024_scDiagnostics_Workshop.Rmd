@@ -454,7 +454,7 @@ cd4_top6_anomalies <- names(sort(cd4_anomalies$query_anomaly_scores, decreasing 
 ```
 
 Next, we plot the densities of the distances for each of these anomalous
-cells for CD4 and CD8.
+cells for CD4 and CD8. 
 
 ```{r plot_anomaly_cd4, message=FALSE}
 plot(distance_data, ref_cell_type = "CD4", cell_names = cd4_top6_anomalies)
