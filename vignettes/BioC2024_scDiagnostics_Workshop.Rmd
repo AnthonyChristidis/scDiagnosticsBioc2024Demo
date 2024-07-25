@@ -4,15 +4,10 @@ author:
     - name: "Anthony Christidis"
       email: "anthony-alexander_christidis@hms.harvard.edu"
     - name: "Andrew Ghazi"
-      email: "andrew.ghazi@hms.harvard.edu"
     - name: "Smriti Chawla"
-      email: "smriti.chawla@hms.harvard.edu"
     - name: "Nitesh Turaga"
-      email: "nitesh.turaga@hms.harvard.edu"
     - name: "Ludwig Geistlinger"
-      email: "ludwig.geistlinger@hms.harvard.edu"
     - name: "Robert Gentleman"
-      email: "robert.gentleman@hms.harvard.edu"
 date: "`r Sys.Date()`"
 output: 
     BiocStyle::html_document:
@@ -46,7 +41,6 @@ knitr::opts_chunk$set(
   pngquant = "--speed=1 --quality=1-10"
 )
 ```
-
 
 # Overview
 
@@ -170,7 +164,12 @@ By the end of this workshop, participants will be able to:
 
 ## `calculateDiscriminantSpace`
 
-This function projects query single-cell RNA-seq data onto the discriminant space defined by reference data. The reference data is used to identify important variables and compute discriminant vectors, which are then used to project both reference and query data. Similarity between the query and reference projections is assessed using cosine similarity and Mahalanobis distance.
+This function projects query single-cell RNA-seq data onto the
+discriminant space defined by reference data. The reference data is used
+to identify important variables and compute discriminant vectors, which
+are then used to project both reference and query data. Similarity
+between the query and reference projections is assessed using cosine
+similarity and Mahalanobis distance.
 
 ```{r discriminant_plot, message=FALSE}
 disc_output <- calculateDiscriminantSpace(reference_data = reference_data,
@@ -183,6 +182,7 @@ disc_output <- calculateDiscriminantSpace(reference_data = reference_data,
 plot(disc_output, plot_type = "scatterplot")
 plot(disc_output, cell_types = "CD4-CD8", plot_type = "boxplot")
 ```
+
 ```{r discriminant_mahalanobis, message=FALSE}
 head(disc_output$`CD8-CD4`$query_mahalanobis_dist)
 disc_output$`CD8-CD4`$mahalanobis_crit
@@ -190,8 +190,10 @@ disc_output$`CD8-CD4`$mahalanobis_crit
 
 ## `plotCellTypePCA`
 
-This function projects the query dataset onto the principal component space of the reference dataset and then plots the specified principal components for the specified cell types. It uses the 'projectPCA' function to perform the projection and `ggplot2` to create the plots.
-
+This function projects the query dataset onto the principal component
+space of the reference dataset and then plots the specified principal
+components for the specified cell types. It uses the 'projectPCA'
+function to perform the projection and `ggplot2` to create the plots.
 
 ```{r pca_plot, message=FALSE}
 pc_plot <- plotCellTypePCA(query_data = query_data, 
@@ -256,10 +258,15 @@ plot(similarity_mat)
 
 ## `compareCCA`
 
-This function compares the subspaces spanned by the top principal components (PCs) of the reference and query datasets using canonical correlation analysis (CCA). It calculates the canonical variables, correlations, and a similarity measure for the subspaces.
+This function compares the subspaces spanned by the top principal
+components (PCs) of the reference and query datasets using canonical
+correlation analysis (CCA). It calculates the canonical variables,
+correlations, and a similarity measure for the subspaces.
 
-The S3 plot method generates a visualization of the output from the `compareCCA` function. The plot shows the cosine similarities of canonical correlation analysis (CCA) coefficients, with point sizes representing the correlations.
-
+The S3 plot method generates a visualization of the output from the
+`compareCCA` function. The plot shows the cosine similarities of
+canonical correlation analysis (CCA) coefficients, with point sizes
+representing the correlations.
 
 ```{r cca_comparison, message=FALSE}
 similarity_mat <- compareCCA(query_data = query_data_subset, 
@@ -269,9 +276,13 @@ similarity_mat <- compareCCA(query_data = query_data_subset,
                              pc_subset = 1:5)
 plot(similarity_mat)
 ```
+
 ## `plotWassersteinDistance`
 
-This function generates a density plot of Wasserstein distances under the null hypothesis that the two datasets come from the same distribution. It computes the null distribution of Wasserstein distances and compares it to the distances between reference and query data.
+This function generates a density plot of Wasserstein distances under
+the null hypothesis that the two datasets come from the same
+distribution. It computes the null distribution of Wasserstein distances
+and compares it to the distances between reference and query data.
 
 ```{r wasserstein, message=FALSE}
 wasserstein_plot <- plotWassersteinDistance(query_data = query_data_subset,
@@ -282,8 +293,6 @@ wasserstein_plot <- plotWassersteinDistance(query_data = query_data_subset,
                                             alpha = 0.05)
 wasserstein_plot
 ```
-
-
 
 ## Evaluate Gene Overlap
 
@@ -364,9 +373,13 @@ round(p_values, 5)
 
 ## `regressPC`
 
-This function performs linear regression of a covariate of interest onto one or more principal components, based on the data in a `SingleCellExperiment` object.
+This function performs linear regression of a covariate of interest onto
+one or more principal components, based on the data in a
+`SingleCellExperiment` object.
 
-The S3 plot method generates plots to visualize the results of regression analyses performed on principal components (PCs) against cell types.
+The S3 plot method generates plots to visualize the results of
+regression analyses performed on principal components (PCs) against cell
+types.
 
 ```{r regress, message=FALSE}
 regress_res <- regressPC(reference_data = reference_data,
@@ -410,10 +423,12 @@ plot(anomaly_output,
 
 ## `calculateCellSimilarityPCA`
 
-This function calculates the cosine similarity between cells based on the principal components (PCs) obtained from PCA (Principal Component Analysis) loadings.
+This function calculates the cosine similarity between cells based on
+the principal components (PCs) obtained from PCA (Principal Component
+Analysis) loadings.
 
-The S3 plot method creates a heatmap plot to visualize the cosine similarities between cells and principal components (PCs).
-
+The S3 plot method creates a heatmap plot to visualize the cosine
+similarities between cells and principal components (PCs).
 
 ```{r similarityPCA, message=FALSE}
 top6_anomalies <- names(sort(anomaly_output$Combined$reference_anomaly_scores, decreasing = TRUE)[1:6])
@@ -464,7 +479,7 @@ cd4_top6_anomalies <- names(sort(cd4_anomalies$query_anomaly_scores, decreasing 
 ```
 
 Next, we plot the densities of the distances for each of these anomalous
-cells for CD4 and CD8. 
+cells for CD4 and CD8.
 
 ```{r plot_anomaly_cd4, message=FALSE}
 plot(distance_data, ref_cell_type = "CD4", cell_names = cd4_top6_anomalies)
