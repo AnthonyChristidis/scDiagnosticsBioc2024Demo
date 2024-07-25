@@ -8,7 +8,7 @@ The accurate annotation of cell types is a critical step in single-cell RNA-sequ
 
 # Workshop Materials
 
-This repository contains the workshop materials. You may find the PDF slides in `inst/slides` which contain an overview of the role of the **`scDiagnostics`** package in cell type annotation. You may find the fully documented workshop code examples in the `vignettes` folder. The workshop Docker image is also publicly available [here](https://github.com/anthonychristidis/scDiagnosticsBioc2024Demo/pkgs/container/scdiagnosticsbioc2024demo).
+This repository contains the workshop materials. You may find the [PDF slides](https://github.com/AnthonyChristidis/scDiagnosticsBioc2024Demo/blob/devel/inst/slides/BioC2024_scDiagnostics.pdf) in `inst/slides` which contain an overview of the role of the **`scDiagnostics`** package in cell type annotation. You may find the fully documented workshop code examples in the [vignettes folder](https://github.com/AnthonyChristidis/scDiagnosticsBioc2024Demo/tree/devel/vignettes). There is also a publicly available [Docker image](https://github.com/anthonychristidis/scDiagnosticsBioc2024Demo/pkgs/container/scdiagnosticsbioc2024demo) to run the vignette in a container with all dependencies already installed.
 
 # Installation
 

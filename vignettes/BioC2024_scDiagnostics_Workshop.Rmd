@@ -3,6 +3,16 @@ title: "ScDiagnostics BioC2024 Workshop"
 author:
     - name: "Anthony Christidis"
       email: "anthony-alexander_christidis@hms.harvard.edu"
+    - name: "Andrew Ghazi"
+      email: "andrew.ghazi@hms.harvard.edu"
+    - name: "Smriti Chawla"
+      email: "smriti.chawla@hms.harvard.edu"
+    - name: "Nitesh Turaga"
+      email: "nitesh.turaga@hms.harvard.edu"
+    - name: "Ludwig Geistlinger"
+      email: "ludwig.geistlinger@hms.harvard.edu"
+    - name: "Robert Gentleman"
+      email: "robert.gentleman@hms.harvard.edu"
 date: "`r Sys.Date()`"
 output: 
     BiocStyle::html_document:
