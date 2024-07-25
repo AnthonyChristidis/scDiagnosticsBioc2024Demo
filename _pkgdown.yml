@@ -14,7 +14,7 @@ navbar:
   title: "scDiagnosticsBioc2024Workshop"
   left:
     - text: "Workshop"
-      href: docs/articles/BioC2024_scDiagnostics_Workshop.html
+      href: articles/BioC2024_scDiagnostics_Workshop.html
      
 
 
