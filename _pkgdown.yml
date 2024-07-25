@@ -1,9 +1,10 @@
 url: https://AnthonyChristidis.github.io/scDiagnosticsBioc2024Demo/
 
 template:
-  params:
-    bootswatch: flatly
-    #ganalytics: UA-99999999-9
+  bootstrap: 5
+  bootswatch: united
+  bslib:
+    text-muted: "#cccccc"
 
 home:
   title: "Bioconductor Workshop for scDiagnostics"
