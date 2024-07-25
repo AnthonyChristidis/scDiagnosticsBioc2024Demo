@@ -46,60 +46,40 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="buildabiocworkshop">BuildABiocWorkshop<a class="anchor" aria-label="anchor" href="#buildabiocworkshop"></a>
+<div class="page-header"><h1 id="scdiagnostics-diagnostic-functions-to-assess-the-quality-of-cell-type-annotations-in-single-cell-rna-seq-data">scDiagnostics: diagnostic functions to assess the quality of cell type annotations in single-cell RNA-seq data<a class="anchor" aria-label="anchor" href="#scdiagnostics-diagnostic-functions-to-assess-the-quality-of-cell-type-annotations-in-single-cell-rna-seq-data"></a>
 </h1></div>
-<p>This package is a template for building a Bioconductor workshop. The package includes Github actions to:</p>
-<ol style="list-style-type: decimal">
-<li>Set up bioconductor/bioconductor_docker:devel on Github resources</li>
-<li>Install package dependencies for your package (based on the <code>DESCRIPTION</code> file)</li>
-<li>Run <code><a href="http://r-lib.github.io/rcmdcheck/reference/rcmdcheck.html" class="external-link">rcmdcheck::rcmdcheck</a></code>
-</li>
-<li>Build a pkgdown website and push it to github pages</li>
-<li>Build a docker image with the installed package and dependencies and deploy to <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#pulling-container-images" class="external-link">the Github Container Repository</a> at the name <code>ghcr.io/gihub_user/repo_name</code>, all lowercase.</li>
-</ol>
-<div class="section level2">
-<h2 id="responsibilities">Responsibilities<a class="anchor" aria-label="anchor" href="#responsibilities"></a>
-</h2>
-<p>Package authors are primarily responsible for:</p>
-<ol style="list-style-type: decimal">
-<li>Creating a landing site of their choosing for their workshops (a website). This website should be listed in the <code>DESCRIPTION</code> file as the <code>URL</code>.</li>
-<li>Creating a docker image that will contain workshop materials and the installed packages necessary to run those materials. The name of the resulting docker image, including “tag” if desired, should be listed in a non-standard tag, <code>DockerImage:</code> in the <code>DESCRIPTION</code> file.</li>
-</ol>
-<p>Both of those tasks can be accomplished using the Github actions included in this template package. The vignette accompanying this package describes how to accomplish both of these tasks.</p>
 </div>
-<div class="section level2">
-<h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
-</h2>
-<p>For detailed instructions, see the <code>How to build a workshop</code> article/vignette.</p>
+<div class="section level1">
+<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h1>
+<p>The accurate annotation of cell types is a critical step in single-cell RNA-sequencing (scRNA-seq) analysis. While annotation transfer from a reference dataset offers a convenient and automated approach, it can also introduce biases and errors if not performed carefully.</p>
+<p><strong><code>scDiagnostics</code></strong> is an R package designed to address this challenge by providing a comprehensive set of diagnostic tools for evaluating the quality of cell type annotations in scRNA-seq data. With <strong><code>scDiagnostics</code></strong>, researchers can systematically assess the compatibility and accuracy of annotations, ensuring reliable and reproducible results in their scRNA-seq analysis workflow.</p>
 </div>
-<div class="section level2">
-<h2 id="results-of-successful-deployment">Results of successful deployment<a class="anchor" aria-label="anchor" href="#results-of-successful-deployment"></a>
-</h2>
-<ul>
-<li>A working docker image that contains the installed package and dependencies.</li>
-<li>An up-to-date <code>pkgdown</code> website at <a href="https://YOURUSERNAME.github.io/YOURREPOSITORYNAME/" class="external-link uri">https://YOURUSERNAME.github.io/YOURREPOSITORYNAME/</a>
-</li>
-<li>Docker image will be tagged with <code>latest</code>, <code>sha-XXXXXX</code> where <code>XXXXXX</code> is the hash of the current <code>master</code> commit, and <code>master</code>.</li>
-</ul>
+<div class="section level1">
+<h1 id="workshop-materials">Workshop Materials<a class="anchor" aria-label="anchor" href="#workshop-materials"></a>
+</h1>
+<p>This repository contains the workshop materials. You may find the PDF slides in <code>inst/slides</code> which contain an overview of the role of the <strong><code>scDiagnostics</code></strong> package in cell type annotation. You may find the fully documented workshop code examples in the <code>vignettes</code> folder. The workshop Docker image is also publicly available <a href="https://github.com/anthonychristidis/scDiagnosticsBioc2024Demo/pkgs/container/scdiagnosticsbioc2024demo" class="external-link">here</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="to-use-the-resulting-image">To use the resulting image:<a class="anchor" aria-label="anchor" href="#to-use-the-resulting-image"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-e</span> PASSWORD=<span class="op">&lt;</span>choose_a_password_for_rstudio<span class="op">&gt;</span> -p 8787:8787 YOURDOCKERIMAGENAME</span></code></pre></div>
-<p>Once running, navigate to <a href="http://localhost:8787/" class="external-link uri">http://localhost:8787/</a> and then login with <code>rstudio</code>:<code>yourchosenpassword</code>.</p>
-<p>To try with <strong>this</strong> repository docker image:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-e</span> PASSWORD=abc <span class="at">-p</span> 8787:8787 ghcr.io/bioconductor/buildabiocworkshop</span></code></pre></div>
-<p><em>NOTE</em>: Running docker that uses the password in plain text like above exposes the password to others in a multi-user system (like a shared workstation or compute node). In practice, consider using an environment variable instead of plain text to pass along passwords and other secrets in docker command lines.</p>
+<div class="section level1">
+<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h1>
+<p>To install the development version of the <strong><code>scDiagnostics</code></strong> from GitHub use the following command:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ccb-hms/scDiagnostics"</span><span class="op">)</span></span></code></pre></div>
+<p>NOTE: you will need the <a href="https://cran.r-project.org/web/packages/remotes/index.html" class="external-link">remotes</a> package to install from GitHub.</p>
+<p>To build the <strong><code>scDiagnostics</code></strong> package vignettes upon installation use:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ccb-hms/scDiagnostics"</span>,</span>
+<span>                         build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                         dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="whatcha-get">Whatcha get<a class="anchor" aria-label="anchor" href="#whatcha-get"></a>
-</h2>
-<ul>
-<li><a href="https://bioconductor.github.io/BuildABiocWorkshop" class="external-link uri">https://bioconductor.github.io/BuildABiocWorkshop</a></li>
-<li>A Docker image that you can run locally, in the cloud, or (usually) even as a singularity container on HPC systems.</li>
-</ul>
+<div class="section level1">
+<h1 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h1>
+<p>To get a complete overview of the functionality of the package, refer to the <a href="https://ccb-hms.github.io/scDiagnostics/index.html" class="external-link">pkgdown website</a> for code examples. The complete documentation of each available function in <strong><code>scDiagnostics</code></strong>, which includes implementation details and working examples, is available in the <a href="https://ccb-hms.github.io/scDiagnostics/reference/index.html" class="external-link">reference tab</a>.</p>
+<p><strong><code>scDiagnostics</code></strong> is designed to be user-friendly and integrates seamlessly into any scRNA-seq analysis workflow. By providing robust diagnostic tools, the package helps ensure the accuracy and reliability of cell type annotations, leading to more meaningful and reproducible results.</p>
 </div>
-</div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
