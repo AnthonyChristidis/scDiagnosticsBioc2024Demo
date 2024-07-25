@@ -30,14 +30,10 @@ knitr::opts_chunk$set(
 
 # ScDiagnostics BioC2024 Workshop
 
-Authors: Anthony Christidis[^1], Andrew Ghazi[^2], Ludwig
-Geistlinger[^3]. <br/> Last modified: 22 July, 2024
+Authors: Anthony Christidis[^1], Andrew Ghazi[^1], Ludwig
+Geistlinger[^1]. <br/> Last modified: 22 July, 2024
 
-[^1]: Core for Computational Biomedicine, Harvard Medical School
-
-[^2]: Core for Computational Biomedicine, Harvard Medical School
-
-[^3]: Core for Computational Biomedicine, Harvard Medical School
+[^1]: Center for Computational Biomedicine, Harvard Medical School
 
 ## Overview
 

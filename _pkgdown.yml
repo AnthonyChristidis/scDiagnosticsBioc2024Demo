@@ -11,8 +11,11 @@ home:
 
 
 navbar:
-  right:
-   - icon: fa-github
-     href: https://github.com/AnthonyChristidis/scDiagnosticsBioc2024Demo
+  title: "scDiagnosticsBioc2024Workshop"
+  left:
+    - text: "Workshop"
+      href: articles/BioC2024_scDiagnostics_Workshop.html
      
+
+
 
